@@ -1,111 +1,123 @@
-🛍️ Product Generator — Refactored Python Project
+# 🛍️ Product Generator — Refactored Python Project
 
-This project generates structured product listings (title, description, features, keywords) using product metadata and images.
-It is a refactored version of earlier labs (M1.05 and M1.06), redesigned to follow professional software engineering practices:
+A modular, production‑ready system for generating structured product listings using product metadata and images.
+This project refactors earlier labs (M1.05 & M1.06) into a clean, testable, maintainable Python package.
 
-Modular architecture
+# 📁 Project Structure
 
-Helper functions
-Clear separation of concerns
-Robust error handling
-Testable components
-No silent failures
-
-The project uses a HuggingFace dataset of fashion product images and prepares prompts for an LLM to generate product descriptions.
-
-📁 Project Structure
-
+```
 product-generator/
-│
-├── .env                     # API keys (not committed)
-├── .gitignore               # Ignore env, cache, outputs
-├── README.md                # This file
+├── .env
+├── .gitignore
+├── README.md
 │
 ├── notebooks/
-│   └── 01_refactor_lab.ipynb   # Notebook for testing & exploration
+│   └── 01_refactor_lab.ipynb
 │
 ├── src/
 │   ├── __init__.py
-│   ├── data_loader.py          # Load dataset (HF or fallback)
-│   ├── image_utils.py          # Image loading + base64 encoding
-│   ├── prompt_builder.py       # Prompt creation
-│   ├── model_api.py            # API wrapper (placeholder or real)
-│   ├── processor.py            # Process a single product
-│   └── batch_runner.py         # Process multiple products
+│   ├── data_loader.py
+│   ├── image_utils.py
+│   ├── prompt_builder.py
+│   ├── model_api.py
+│   ├── processor.py
+│   └── batch_runner.py
 │
-└── main.py                     # Entry point to run the full pipeline
+└── main.py
+```
 
-🚀 Features
+# 🚀 Features
 
-- Loads product data from HuggingFace or local fallback
-- Extracts and encodes product images
-- Builds structured prompts for LLMs
-- Processes products individually or in batches
-- Captures and reports errors with full traceback
-- Saves generated listings to JSON
+✔ Modular Architecture
+Each responsibility lives in its own module (data_loader, image_utils, processor, etc.).
 
-🔧 Installation
+✔ Robust Error Handling
+Every function raises clear, contextual errors with full tracebacks.
 
-1. Clone the repository:
-   git clone <your-repo-url>
+✔ Image Processing
+Loads and encodes product images from HuggingFace or local fallback.
+
+✔ Prompt Generation
+Builds structured prompts for LLM‑based product description generation.
+
+✔ Batch Processing
+Processes hundreds of products with progress output and error tracking.
+
+# 🔧 Installation
+
+1. Clone the repository
+```Code
+git clone <your-repo-url>
 cd product-generator
+```
 
-3. Create a virtual environment:
-   python -m venv venv
-source venv/bin/activate   # macOS/Linux
+4. Create a virtual environment
+```Code
+python -m venv venv
 venv\Scripts\activate      # Windows
+source venv/bin/activate   # macOS/Linux
+```
 
-4. Install dependencies:
-   pip install -r requirements.txt
+5. Install dependencies
+```Code
+pip install -r requirements.txt
+```
 
-🔐 Environment Variables
+# 🔐 Environment Variables
+
 Create a .env file in the project root:
-
+```Code
 OPENAI_API_KEY=your_key_here
-
 This file is ignored by Git.
+```
 
-▶️ Running the Project
+# ▶️ Running the Project
 
-Run the full batch pipeline:
+Run the full pipeline:
+```Code
 python main.py
-
+```
 This will:
 
-- Load the dataset
-- Process each product
-- Generate prompts
-- Call the model (placeholder or real)
-- Save results to product_listings.json
+✔ Load the dataset
+✔ Process each product
+✔ Build prompts
+✔ Call the model (placeholder or real)
+✔ Save results to product_listings.json
 
-🧪 Using the Notebook
+# 🧪 Using the Notebook
 
 The notebook is for testing only.
 
-It should contain:
+## It should contain:
 
-- A clean import cell
-- A dataset preview
-- A single‑product test
-- A batch test
+✔ Import cell
+✔ Dataset preview
+✔ Single‑product test
+✔ Batch test
 
-It should not contain business logic or helper functions.
+## It should not contain:
 
-🧱 Error Handling
+- Helper functions
+- API logic
+- Image processing logic
+- Business logic
 
-This project follows the rule: Do not fail silently — fail loudly and show WHERE the error occurred.
+All real logic lives in src/.
+
+# 🧱 Error Handling Philosophy
+
+This project follows a strict rule: Do not fail silently — fail loudly and show WHERE the error occurred.
 
 Every module raises errors with:
 
 - Function name
 - Product ID
 - Full traceback
-- Contextual message
+- Helpful context
 
-📌 Notes
+# 📌 Notes
 
 - The Edge browser metadata block that sometimes appears in notebooks is not part of this project and should be deleted whenever it appears.
-- All real logic lives in src/.
-- The notebook is only a sandbox for exploration.
-
-
+- The src/ folder contains all real logic.
+- The notebook is a sandbox for exploration, not the application.
